@@ -8,6 +8,9 @@
     "format": "bunx biome format . --write",
     "lint": "bunx biome lint .",
     "check:format": "bunx biome format .",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "ci:typecheck": "bunx tsc --noEmit",
     "ci:check": "bun run check:format && bun run lint && bun run ci:typecheck"
   },
@@ -27,6 +30,7 @@
     "@types/bun": "latest",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.16"
   }
 }
