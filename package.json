@@ -2,10 +2,20 @@
   "name": "ts-onion-architecture",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
+    "build": "bun build src/index.ts --outdir=dist --target=bun",
+    "start": "bun run dist/index.js",
     "prepare": "husky",
-    "lint": "bunx biome lint --write ./src",
-    "format": "bunx biome format --write ./src",
-    "check": "bunx biome check --write ./src"
+    "format": "bunx biome format . --write",
+    "lint": "bunx biome lint .",
+    "check:format": "bunx biome format .",
+    "ci:typecheck": "bunx tsc --noEmit",
+    "ci:check": "bun run check:format && bun run lint && bun run ci:typecheck"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json}": [
+      "bunx biome format --write",
+      "bunx biome lint"
+    ]
   },
   "dependencies": {
     "hono": "^4.11.0"
@@ -15,6 +25,8 @@
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
     "@types/bun": "latest",
-    "husky": "^9.1.7"
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "typescript": "^5.9.3"
   }
 }
