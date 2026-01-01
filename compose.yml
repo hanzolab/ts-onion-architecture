@@ -1,0 +1,16 @@
+name: todo-api
+services:
+  db:
+    image: postgres:18
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: todo-api
+    volumes:
+      - db_data:/var/lib/postgresql
+
+volumes:
+  db_data:
+    name: todo-api-db-data

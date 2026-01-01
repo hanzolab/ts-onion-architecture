@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id // UUID v7はドメインエンティティで生成
+  email     String   @unique
+  name      String
+  createdAt DateTime
+  updatedAt DateTime
+  todos     Todo[] // Todoとのリレーション
+
+  @@index([name])
+  @@map("users")
+}
+
+model Todo {
+  id        String     @id // UUID v7はドメインエンティティで生成
+  userId    String // Userへの外部キー
+  title     String // TodoTitle Value Objectの値（最大200文字）
+  body      String? // TodoBody Value Objectの値（最大1000文字、空文字列も許可）
+  status    TodoStatus
+  createdAt DateTime
+  updatedAt DateTime
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, status])
+  @@index([title])
+  @@map("todos")
+}
+
+enum TodoStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  PENDING
+  COMPLETED
+
+  @@map("todo_status")
+}
