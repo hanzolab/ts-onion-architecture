@@ -7,7 +7,17 @@
     "skipLibCheck": true,
     "strict": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
+    "jsxImportSource": "hono/jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "lib",
+    "tests/integration/todo-repository.test.ts",
+    "tests/integration/user-repository.test.ts",
+    "tests/integration/test-container.ts"
+  ]
 }
