@@ -6,7 +6,7 @@
     "build": "bun build src/index.ts --outdir=dist --target=bun",
     "start": "bun run dist/index.js",
     "prepare": "husky",
-    "format": "bunx biome format . --write",
+    "format": "bunx biome check . --write --linter-enabled=false",
     "lint": "bunx biome lint .",
     "check:format": "bunx biome format .",
     "test": "vitest",
@@ -17,7 +17,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json}": [
-      "bunx biome format --write",
+      "bunx biome check --write --linter-enabled=false",
       "bunx biome lint"
     ]
   },
